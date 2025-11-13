@@ -6,3 +6,5 @@ test:
 
 run: build
 	@./bin/go-product-memory-manager
+
+cmd: build
