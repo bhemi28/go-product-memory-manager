@@ -11,6 +11,7 @@ import (
 
 type Handler struct {
 	db *db.Queries
+}
 
 func NewHandler(db *db.Queries) *Handler {
 	return &Handler{

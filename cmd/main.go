@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/bhemi28/go-product-memory-manager/cmd/api"
@@ -13,10 +14,12 @@ func main() {
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
+	mfg := db.ConnectToMongo()
 
 	defer conn.Close()
+	defer mfg.Disconnect(context.Background())
 
-	server := api.NewApiServer(addr, dbCfg)
+	server := api.NewApiServer(addr, dbCfg, mfg)
 
 	if err := server.Start(); err != nil {
 		log.Fatal("Failed to start server:", err)
